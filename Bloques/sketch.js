@@ -38,7 +38,7 @@ function draw() {
 function keyPressed() {
   mover = true;
 }
-
+// comentario
 function keyReleased() {
   mover = false;
 }
