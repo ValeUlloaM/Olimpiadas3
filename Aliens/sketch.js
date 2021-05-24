@@ -1,11 +1,13 @@
 let tank;
 let aliens = [];
-this.bullets = [];
+let bullets = [];
+let looser = false;
+
 
 function setup() {
   createCanvas(630, 600);
   tank = new Tank();
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 6; i++) {
     aliens.push(new Alien(random(0, 630), random(-50, 0))); //Creates Aliens
   }
 }
@@ -13,23 +15,29 @@ function setup() {
 function draw() {
   background(0);
   tank.show();
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < aliens.length; i++) {
     aliens[i].show()
-    if (aliens[i].die) {
-      aliens.splice(i, 1);
-      break;
-    }
   }
 
   for (let i = 0; i < bullets.length; i++) {
     bullets[i].show();
     removeDeathBullets();
   }
+
+  validateImpact();
+  validateLost();
+
+  if (looser === true) {
+    fill(255);
+    textSize(58);
+    textAlign(CENTER);
+    text('GAME OVER', 314, 340);
+  }
 }
 
 function mousePressed() {
 
-  this.bullets.push(new Bullet(tank.getX(), tank.getY()));
+  bullets.push(new Bullet(tank.getX(), tank.getY()));
 
 }
 
@@ -57,10 +65,19 @@ function removeDeathBullets() {
 
 function validateImpact() {
   for (let i = 0; i < bullets.length; i++) {
-    if (dist(bullets[i].getX(), bullets[i].getY(),aliens[i].getX(), aliens[i].getY()) < bullets[i].getTam()/2 ){
-      aliens.splice(i,1);
+    for (let j = 0; j < aliens.length; j++) {
+      if (dist(bullets[i].getX(), bullets[i].getY(), aliens[j].getX(), aliens[j].getY()) < aliens[j].getTam() / 2) {
+        aliens.splice(j, 1);
+        console.log("impact");
+      }
     }
   }
 }
 
-
+function validateLost() {
+  for (let i = 0; i < aliens.length; i++) {
+    if (aliens[i].getY() >= 600) {
+      looser = true;
+    }
+  }
+}

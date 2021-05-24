@@ -34,4 +34,8 @@ class Alien {
     getY() {
         return this.y;
     }
+
+    getTam() {
+        return this.tam;
+    }
 }
