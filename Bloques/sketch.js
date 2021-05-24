@@ -2,6 +2,8 @@ let bloques = [];
 let barra = new Barra(232, 535);
 let bola = new Bola(300, 300);
 let mover = false;
+let score = 0;
+let ganador = false;
 
 function setup() {
   createCanvas(630, 600);
@@ -24,7 +26,8 @@ function draw() {
   bola.bounce();
   validateTouch();
   Eliminate();
-
+  restPoints();
+  
   if (mover) {
     barra.keyMove();
   }
@@ -33,7 +36,15 @@ function draw() {
       bloques[j][i].paint();
     }
   }
-}
+
+  //Puntos jugador
+  textSize(18);
+  textAlign(CENTER);
+  fill(0);
+  text('Score: ' + score, 76, 554);
+
+  }
+
 
 function keyPressed() {
   mover = true;
@@ -50,23 +61,34 @@ function validateTouch() {
     bola.getX() >= barra.getX() && bola.getX() <= barra.getX() + 166) {
     bola.setVelocidadX(bola.getVelocidadX() * 1);
     bola.setVelocidadY(bola.getVelocidadY() * -1);
-
   }
+
 }
 
 function Eliminate() {
   for (let i = 0; i < 4; i++) {
     for (let j = 0; j < 4; j++) {
-      if ( bola.getX()>bloques[j][i].getX()&&bola.getX()<bloques[j][i].getX()+126 && 
-      bola.getY()>bloques[j][i].getY()&&bola.getY()<bloques[j][i].getY()+33&&bloques[j][i].getActive()) {
-       // if (dist(bloques[j][i].getX()+126/2, bloques[j][i].getY()+33/2, bola.getX(), bola.getY()) < 20) {
-       bloques[j][i].setActive(false);     
-       bola.setVelocidadX(bola.getVelocidadX() * 1);
-    bola.setVelocidadY(bola.getVelocidadY() * -1);  
-       //bloques[j][i].setColor(255,0,0);
-       //console.log(bloques[j][i]);
+      if (bola.getX() > bloques[j][i].getX() && bola.getX() < bloques[j][i].getX() + 126 &&
+        bola.getY() > bloques[j][i].getY() && bola.getY() < bloques[j][i].getY() + 33 && bloques[j][i].getActive()) {
+        // if (dist(bloques[j][i].getX()+126/2, bloques[j][i].getY()+33/2, bola.getX(), bola.getY()) < 20) {
+        bloques[j][i].setActive(false);
+        bola.setVelocidadX(bola.getVelocidadX() * 1);
+        bola.setVelocidadY(bola.getVelocidadY() * -1);
+        points();
+
       }
 
     }
   }
 }
+
+function points() {
+  score = score + 1
+}
+
+function restPoints() {
+  if (bola.getY() === 580) {
+    score = score - 1;
+  }
+}
+

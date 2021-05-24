@@ -4,9 +4,9 @@ class Bloque {
         this.y = y;
         this.w = 126;
         this.h = 33; 
-        this.r = 0;
-        this.g = 0;
-        this.b = 0;
+        this.r = 249;
+        this.g = 59;
+        this.b = 183;
         this.active = true;
     }
 
@@ -17,8 +17,7 @@ class Bloque {
             noStroke();
             rect(this.x, this.y, this.w, this.h);
         }
-        
-
+       
     }
 
     getX() {

@@ -1,5 +1,7 @@
 let cuadros = [];
 let turno = true;
+let ganador = 0;
+hayUnGanador = false;
 
 function setup() {
   createCanvas(800, 900);
@@ -29,7 +31,24 @@ function draw() {
     }
   }
 
-  //winner();
+  winner();
+
+  if (hayUnGanador === true) {
+    if (ganador === 1) {
+      fill(0)
+      textSize(64)
+      textAlign(CENTER);
+      text('Gano X!', 400, 850);
+      textAlign(CORNER);
+    }else if (ganador === 2){
+      fill(0)
+      textSize(64)
+      textAlign(CENTER);
+      text('Gano O!', 400, 850);
+      textAlign(CORNER); 
+    }
+
+  }
 }
 
 
@@ -48,25 +67,62 @@ function mousePressed() {
   }
 }
 
-//function winner() {
- // for (let i = 0; i < 3; i++) {
-    //for (let j = 0; j < 3; j++) {
-      //if (((cuadros[0][0] && cuadros[1][0] && cuadros[2][0]) === cuadros[j][i].setEstado(1))||
-        //((cuadros[0][1] && cuadros[1][1] && cuadros[2][1]) === cuadros[j][i].setEstado(1)) ||
-        //((cuadros[0][2] && cuadros[1][2] && cuadros[2][2]) === cuadros[j][i].setEstado(1)) ||
-       //((cuadros[0][0] && cuadros[0][1] && cuadros[0][2])  === cuadros[j][i].setEstado(1)) ||
-        //((cuadros[1][0] && cuadros[1][1] && cuadros[1][2]) === cuadros[j][i].setEstado(1)) ||
-       // ((cuadros[2][0] && cuadros[2][1] && cuadros[2][2]) === cuadros[j][i].setEstado(1)) ||
-       // ((cuadros[0][0] && cuadros[1][1] && cuadros[2][2]) === cuadros[j][i].setEstado(1)) ||
-       // ((cuadros[2][0] && cuadros[1][1] && cuadros[0][2]) === cuadros[j][i].setEstado(1))) {
-        
-       //fill(0)
-       // textSize(64)
-       // textAlign(CENTER);
-       // text('Gano X!', 400, 850);
-       // textAlign(CORNER);
-      //}
+function winner() {
 
-    //}
- // }
-//}
+  // Combinaciones ganadoras para jugador 1
+  if (cuadros[0][0].getEstado() === 1 && cuadros[0][1].getEstado() === 1 && cuadros[0][2].getEstado() === 1) {
+    ganador = 1;
+  }
+  if (cuadros[1][0].getEstado() === 1 && cuadros[1][1].getEstado() === 1 && cuadros[1][2].getEstado() === 1) {
+    ganador = 1;
+  }
+  if (cuadros[2][0].getEstado() === 1 && cuadros[2][1].getEstado() === 1 && cuadros[2][2].getEstado() === 1) {
+    ganador = 1;
+  }
+  if (cuadros[0][0].getEstado() === 1 && cuadros[1][0].getEstado() === 1 && cuadros[2][0].getEstado() === 1) {
+    ganador = 1;
+  }
+  if (cuadros[0][1].getEstado() === 1 && cuadros[1][1].getEstado() === 1 && cuadros[2][1].getEstado() === 1) {
+    ganador = 1;
+  }
+  if (cuadros[0][2].getEstado() === 1 && cuadros[1][2].getEstado() === 1 && cuadros[2][2].getEstado() === 1) {
+    ganador = 1;
+  }
+  if (cuadros[0][0].getEstado() === 1 && cuadros[1][1].getEstado() === 1 && cuadros[2][2].getEstado() === 1) {
+    ganador = 1;
+  }
+  if (cuadros[2][0].getEstado() === 1 && cuadros[1][1].getEstado() === 1 && cuadros[0][2].getEstado() === 1) {
+    ganador = 1;
+  }
+
+  // Combinaciones ganadoras para jugador 2
+  if (cuadros[0][0].getEstado() === 2 && cuadros[0][1].getEstado() === 2 && cuadros[0][2].getEstado() === 2) {
+    ganador = 2;
+  }
+  if (cuadros[1][0].getEstado() === 2 && cuadros[1][1].getEstado() === 2 && cuadros[1][2].getEstado() === 2) {
+    ganador = 2;
+  }
+  if (cuadros[2][0].getEstado() === 2 && cuadros[2][1].getEstado() === 2 && cuadros[2][2].getEstado() === 2) {
+    ganador = 2;
+  }
+  if (cuadros[0][0].getEstado() === 2 && cuadros[1][0].getEstado() === 2 && cuadros[2][0].getEstado() === 2) {
+    ganador = 2;
+  }
+  if (cuadros[0][1].getEstado() === 2 && cuadros[1][1].getEstado() === 2 && cuadros[2][1].getEstado() === 2) {
+    ganador = 2;
+  }
+  if (cuadros[0][2].getEstado() === 2 && cuadros[1][2].getEstado() === 2 && cuadros[2][2].getEstado() === 2) {
+    ganador = 2;
+  }
+  if (cuadros[0][0].getEstado() === 2 && cuadros[1][1].getEstado() === 2 && cuadros[2][2].getEstado() === 2) {
+    ganador = 2;
+  }
+  if (cuadros[2][0].getEstado() === 2 && cuadros[1][1].getEstado() === 2 && cuadros[0][2].getEstado() === 2) {
+    ganador = 2;
+  }
+
+  if (ganador !== 0) {
+    hayUnGanador = true;
+  }
+
+}

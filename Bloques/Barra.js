@@ -24,9 +24,9 @@ class Barra{
 
         //Movimiento
         if (keyCode === LEFT_ARROW) {
-            this.x -= 2;
+            this.x -= 5;
         } else if (keyCode === RIGHT_ARROW) {
-            this.x += 2;
+            this.x += 5;
         }
     }
 

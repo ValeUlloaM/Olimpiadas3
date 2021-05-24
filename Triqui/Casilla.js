@@ -3,7 +3,7 @@ class Casilla {
         this.x = x;
         this.y = y;
         this.tam = 200;
-        this.estado = 0; 
+        this.estado = 0;
     }
 
     paint() {
@@ -42,5 +42,8 @@ class Casilla {
 
     setEstado(estado) {
         this.estado = estado;
+    }
+    getEstado() {
+        return this.estado;
     }
 }
